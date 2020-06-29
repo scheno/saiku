@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.saikuanalytics</groupId>
@@ -23,15 +24,23 @@
     </modules>
 
     <distributionManagement>
+        <!--        <repository>-->
+        <!--            <id>utility</id>-->
+        <!--            <name>utility-releases</name>-->
+        <!--            <url>http://repo.meteorite.bi/repository/alabs-release-local/</url>-->
+        <!--        </repository>-->
+        <!--        <snapshotRepository>-->
+        <!--            <id>utility</id>-->
+        <!--            <name>utility-snapshots</name>-->
+        <!--            <url>http://repo.meteorite.bi/repository/alabs-snapshot-local/</url>-->
+        <!--        </snapshotRepository>-->
         <repository>
-            <id>utility</id>
-            <name>utility-releases</name>
-            <url>http://repo.meteorite.bi/repository/alabs-release-local/</url>
+            <id>gitlab-maven</id>
+            <url>https://gitlab.com/api/v4/projects/14840263/packages/maven</url>
         </repository>
         <snapshotRepository>
-            <id>utility</id>
-            <name>utility-snapshots</name>
-            <url>http://repo.meteorite.bi/repository/alabs-snapshot-local/</url>
+            <id>gitlab-maven</id>
+            <url>https://gitlab.com/api/v4/projects/14840263/packages/maven</url>
         </snapshotRepository>
     </distributionManagement>
     <properties>
@@ -52,23 +61,43 @@
         <jbehave.version>3.9.3</jbehave.version>
     </properties>
     <pluginRepositories>
+        <!--        <pluginRepository>-->
+        <!--            <id>Analytical Labs Plugin Repo</id>-->
+        <!--            <name>Analytical Labs Repo-releases</name>-->
+        <!--            <url>http://repo.meteorite.bi/repository/alabs-release-local/</url>-->
+        <!--        </pluginRepository>-->
         <pluginRepository>
-            <id>Analytical Labs Plugin Repo</id>
-            <name>Analytical Labs Repo-releases</name>
-            <url>http://repo.meteorite.bi/repository/alabs-release-local/</url>
+            <id>pentaho-third-party</id>
+            <url>http://nexus.pentaho.org/content/repositories/proxy-public-3rd-party-release/</url>
         </pluginRepository>
     </pluginRepositories>
 
     <repositories>
+        <!--        <repository>-->
+        <!--            <id>Analytical Labs Repo</id>-->
+        <!--            <name>Analytical Labs Repo-releases</name>-->
+        <!--            <url>http://repo.meteorite.bi/repository/alabs-release-local/</url>-->
+        <!--        </repository>-->
+        <!--        <repository>-->
+        <!--            <id>Analytical Labs snapshots</id>-->
+        <!--            <name>Analytical Labs Repo-releases</name>-->
+        <!--            <url>http://repo.meteorite.bi/repository/alabs-snapshot-local/</url>-->
+        <!--        </repository>-->
         <repository>
-            <id>Analytical Labs Repo</id>
-            <name>Analytical Labs Repo-releases</name>
-            <url>http://repo.meteorite.bi/repository/alabs-release-local/</url>
+            <id>gitlab-maven</id>
+            <url>https://gitlab.com/api/v4/projects/14840263/packages/maven</url>
         </repository>
         <repository>
-            <id>Analytical Labs snapshots</id>
-            <name>Analytical Labs Repo-releases</name>
-            <url>http://repo.meteorite.bi/repository/alabs-snapshot-local/</url>
+            <id>saiku-group</id>
+            <url>https://nexus.nuiton.org/nexus/content/repositories/saiku-group/</url>
+        </repository>
+        <repository>
+            <id>pentaho-pentaho-third-party</id>
+            <url>http://nexus.pentaho.org/content/repositories/proxy-pentaho-public-release-group/</url>
+        </repository>
+        <repository>
+            <id>pentaho-public-third-party</id>
+            <url>http://nexus.pentaho.org/content/repositories/proxy-public-3rd-party-release/</url>
         </repository>
         <repository>
             <id>pentaho-third-party</id>
@@ -115,10 +144,10 @@
             </snapshots>
         </repository>
 
-    	<repository>
-    		<id>pentaho-releases</id>
-    		<url>http://repository.pentaho.org/artifactory/repo/</url>
-    	</repository>
+        <repository>
+            <id>pentaho-releases</id>
+            <url>http://repository.pentaho.org/artifactory/repo/</url>
+        </repository>
 
         <repository>
             <id>miredot</id>
@@ -132,57 +161,57 @@
     <build>
         <plugins>
 
- <plugin>
-              <groupId>org.owasp</groupId>
-              <artifactId>dependency-check-maven</artifactId>
-              <version>2.1.1</version>
-              <executions>
-                  <execution>
-                      <goals>
-                          <goal>check</goal>
-                      </goals>
-                  </execution>
-              </executions>
-            </plugin>
-      <!--      <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-changes-plugin</artifactId>
-                <version>2.11</version>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>2.1.1</version>
                 <executions>
                     <execution>
-                        <id>include-announcement-file</id>
-                        <phase>generate-resources</phase>
                         <goals>
-                            <goal>announcement-generate</goal>
+                            <goal>check</goal>
                         </goals>
-                        <configuration>
-                            <announcementFile>CHANGES.txt</announcementFile>
-                            <announcementDirectory>${project.build.outputDirectory}/META-INF</announcementDirectory>
-                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <issueManagementSystems>
-                        <issueManagementSystem>JIRA</issueManagementSystem>
-                    </issueManagementSystems>
-                    <smtpHost>mail.yourhost.com</smtpHost>
-                    <smtpPort implementation="java.lang.Integer">25</smtpPort>
-                    <mailSender>
-                        <name>Release Notification</name>
-                        <email>build@example.com</email>
-                    </mailSender>
-                    <toAddresses>
-                        <toAddress implementation="java.lang.String">to@example.com</toAddress>
-                    </toAddresses>
-                    <useJql>true</useJql>
-                    <onlyCurrentVersion>true</onlyCurrentVersion>
-                    <resolutionIds>Fixed,Done</resolutionIds>
-                    <statusIds>Closed,Resolved,Done</statusIds>
-                    <columnNames>Type,Key,Summary,Priority,Status,Resolution,Fix Version,Assignee</columnNames>
-                    <webUser>...</webUser>
-                    <webPassword>...</webPassword>
-                </configuration>
-            </plugin>-->
+            </plugin>
+            <!--      <plugin>
+                      <groupId>org.apache.maven.plugins</groupId>
+                      <artifactId>maven-changes-plugin</artifactId>
+                      <version>2.11</version>
+                      <executions>
+                          <execution>
+                              <id>include-announcement-file</id>
+                              <phase>generate-resources</phase>
+                              <goals>
+                                  <goal>announcement-generate</goal>
+                              </goals>
+                              <configuration>
+                                  <announcementFile>CHANGES.txt</announcementFile>
+                                  <announcementDirectory>${project.build.outputDirectory}/META-INF</announcementDirectory>
+                              </configuration>
+                          </execution>
+                      </executions>
+                      <configuration>
+                          <issueManagementSystems>
+                              <issueManagementSystem>JIRA</issueManagementSystem>
+                          </issueManagementSystems>
+                          <smtpHost>mail.yourhost.com</smtpHost>
+                          <smtpPort implementation="java.lang.Integer">25</smtpPort>
+                          <mailSender>
+                              <name>Release Notification</name>
+                              <email>build@example.com</email>
+                          </mailSender>
+                          <toAddresses>
+                              <toAddress implementation="java.lang.String">to@example.com</toAddress>
+                          </toAddresses>
+                          <useJql>true</useJql>
+                          <onlyCurrentVersion>true</onlyCurrentVersion>
+                          <resolutionIds>Fixed,Done</resolutionIds>
+                          <statusIds>Closed,Resolved,Done</statusIds>
+                          <columnNames>Type,Key,Summary,Priority,Status,Resolution,Fix Version,Assignee</columnNames>
+                          <webUser>...</webUser>
+                          <webPassword>...</webPassword>
+                      </configuration>
+                  </plugin>-->
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -205,6 +234,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>
+                <version>1.14</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.rat</groupId>
@@ -313,9 +343,9 @@
         </plugins>
     </reporting>-->
     <profiles>
-            <profile>
-                <id>ci</id>
-                <modules>
+        <profile>
+            <id>ci</id>
+            <modules>
                 <module>saiku-core</module>
                 <module>saiku-ui</module>
                 <module>saiku-webapp</module>
@@ -706,7 +736,7 @@
             <dependency>
                 <groupId>pentaho</groupId>
                 <artifactId>mondrian</artifactId>
-                <version>4.3.0.1.1-SPARK</version>
+                <version>4.3.0.1.2-SPARK</version>
             </dependency>
             <!-- Spring modules -->
             <dependency>

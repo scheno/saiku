@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>saiku</artifactId>
         <groupId>org.saikuanalytics</groupId>
@@ -271,37 +272,41 @@
                             <tasks>
                                 <unzip dest="target/dist/saiku/ui/">
                                     <fileset dir="target/stage/">
-                                        <include name="saiku-ui-${project.version}.war" />
+                                        <include name="saiku-ui-${project.version}.war"/>
                                     </fileset>
                                 </unzip>
-                                <copy file="${basedir}/target/${project.artifactId}-${project.version}.jar" todir="target/dist/saiku/lib" />
+                                <copy file="${basedir}/target/${project.artifactId}-${project.version}.jar"
+                                      todir="target/dist/saiku/lib"/>
                                 <copy todir="target/dist/saiku/" overwrite="true">
                                     <fileset dir="${basedir}/src/main/plugin/">
-                                        <include name="**/*.xml" />
-                                        <exclude name="**/version.xml" />
+                                        <include name="**/*.xml"/>
+                                        <exclude name="**/version.xml"/>
                                     </fileset>
                                 </copy>
                                 <copy todir="target/dist/saiku/" overwrite="true">
                                     <fileset dir="${basedir}/src/main/plugin/">
-                                        <include name="plugin.spring.xml" />
+                                        <include name="plugin.spring.xml"/>
                                     </fileset>
                                 </copy>
-                                <mkdir dir="target/dist/saiku/saiku-repository" />
+                                <mkdir dir="target/dist/saiku/saiku-repository"/>
                                 <copy todir="target/dist/saiku/ui/" overwrite="true">
                                     <fileset dir="${basedir}/src/main/plugin/">
-                                        <include name="*.properties" />
+                                        <include name="*.properties"/>
                                     </fileset>
                                 </copy>
-                                <replaceregexp match="(&lt;!-- Saiku plugins --&gt;)" replace=" &lt;script type='text/javascript' src='js/saiku/plugins/Statistics/plugin.js' defer&gt;&lt;/script&gt;&#xA; &lt;script type='text/javascript' src='js/saiku/plugins/BIServer/plugin.js' defer&gt;&lt;/script&gt;&#xA;     &lt;script type='text/javascript' src='js/saiku/plugins/CCC_Chart/plugin.js'&gt;&lt;/script&gt;&#xA;       " flags="gs" byline="false">
-                                    <fileset dir="target/dist/saiku/ui/" includes="index.html" />
+                                <replaceregexp match="(&lt;!-- Saiku plugins --&gt;)"
+                                               replace=" &lt;script type='text/javascript' src='js/saiku/plugins/Statistics/plugin.js' defer&gt;&lt;/script&gt;&#xA; &lt;script type='text/javascript' src='js/saiku/plugins/BIServer/plugin.js' defer&gt;&lt;/script&gt;&#xA;     &lt;script type='text/javascript' src='js/saiku/plugins/CCC_Chart/plugin.js'&gt;&lt;/script&gt;&#xA;       "
+                                               flags="gs" byline="false">
+                                    <fileset dir="target/dist/saiku/ui/" includes="index.html"/>
                                 </replaceregexp>
-                                <replaceregexp match="(REPOSITORY_LAZY: false,)" replace="REPOSITORY_LAZY: true," flags="gs" byline="false">
-                                    <fileset dir="target/dist/saiku/ui/js/saiku/" includes="Settings.js" />
-                                    <fileset dir="target/dist/saiku/ui/js/saiku/" includes="Settings.yaml" />
+                                <replaceregexp match="(REPOSITORY_LAZY: false,)" replace="REPOSITORY_LAZY: true,"
+                                               flags="gs" byline="false">
+                                    <fileset dir="target/dist/saiku/ui/js/saiku/" includes="Settings.js"/>
+                                    <fileset dir="target/dist/saiku/ui/js/saiku/" includes="Settings.yaml"/>
 
                                 </replaceregexp>
                                 <zip destfile="target/saiku-plugin-p7-${project.version}.zip">
-                                    <zipfileset dir="target/dist/" />
+                                    <zipfileset dir="target/dist/"/>
                                 </zip>
 
                             </tasks>
@@ -351,15 +356,31 @@
         </plugins>
     </build>
     <repositories>
+        <!--        <repository>-->
+        <!--            <id>Analytical Labs Repo</id>-->
+        <!--            <name>Analytical Labs Repo-releases</name>-->
+        <!--            <url>http://repo.meteorite.bi/repository/alabs-release-local/</url>-->
+        <!--        </repository>-->
+        <!--        <repository>-->
+        <!--            <id>Analytical Labs snapshots</id>-->
+        <!--            <name>Analytical Labs Repo-releases</name>-->
+        <!--            <url>http://repo.meteorite.bi/repository/alabs-snapshot-local</url>-->
+        <!--        </repository>-->
         <repository>
-            <id>Analytical Labs Repo</id>
-            <name>Analytical Labs Repo-releases</name>
-            <url>http://repo.meteorite.bi/repository/alabs-release-local/</url>
+            <id>gitlab-maven</id>
+            <url>https://gitlab.com/api/v4/projects/14840263/packages/maven</url>
         </repository>
         <repository>
-            <id>Analytical Labs snapshots</id>
-            <name>Analytical Labs Repo-releases</name>
-            <url>http://repo.meteorite.bi/repository/alabs-snapshot-local</url>
+            <id>saiku-group</id>
+            <url>https://nexus.nuiton.org/nexus/content/repositories/saiku-group/</url>
+        </repository>
+        <repository>
+            <id>pentaho-pentaho-third-party</id>
+            <url>http://nexus.pentaho.org/content/repositories/proxy-pentaho-public-release-group/</url>
+        </repository>
+        <repository>
+            <id>pentaho-public-third-party</id>
+            <url>http://nexus.pentaho.org/content/repositories/proxy-public-3rd-party-release/</url>
         </repository>
         <repository>
             <id>pentaho-third-party</id>
@@ -388,7 +409,9 @@
             <name>Apache repo</name>
             <layout>default</layout>
             <url>https://repository.apache.org/content/repositories/snapshots/</url>
-            <snapshots><enabled>true</enabled></snapshots>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
     </repositories>
     <dependencies>
