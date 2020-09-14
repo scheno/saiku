@@ -71,12 +71,13 @@ public class License {
   @GET
   @Produces({ "application/json" })
   public Response getLicense() {
-    try {
-      return Response.ok().entity(licenseUtils.getLicense()).build();
-    } catch (IOException | RepositoryException | ClassNotFoundException e) {
-      e.printStackTrace();
-    }
-    return Response.serverError().build();
+//    try {
+//      return Response.ok().entity(licenseUtils.getLicense()).build();
+//    } catch (IOException | RepositoryException | ClassNotFoundException e) {
+//      e.printStackTrace();
+//    }
+//    return Response.serverError().build();
+      return Response.ok().build();
   }
 
   private static final int SIZE = 2048;
